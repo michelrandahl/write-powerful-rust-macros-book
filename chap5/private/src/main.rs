@@ -49,10 +49,10 @@ fn main() {
 
     let composed = compose!
         ( add_one
-        . add_one
-        . add_one
-        . stringify
-        . prefix_fn
+        >> add_one
+        >> add_one
+        >> stringify
+        >> prefix_fn
         );
     let res = composed(42);
     println!("composed {}", res);

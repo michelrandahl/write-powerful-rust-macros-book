@@ -87,48 +87,14 @@ pub fn local_fixed2(_item: TokenStream) -> TokenStream {
 // chapter 5.3 - Compose macro
 
 struct ComposeInput {
-    expressions: Punctuated::<Ident, Token!(.)>
+    expressions: Punctuated::<Ident, Token!(>>)>
 }
 
 impl Parse for ComposeInput {
     fn parse(input: ParseStream) -> Result<Self, syn::Error> {
-        Ok(ComposeInput {expressions: Punctuated::<Ident, Token!(.)>::parse_terminated(input).unwrap()})
+        Ok(ComposeInput {expressions: Punctuated::<Ident, Token!(>>)>::parse_terminated(input).unwrap()})
     }
 }
-
-//impl ToTokens for ComposeInput {
-//    fn to_tokens(&self, tokens: &mut proc_macro2::TokenStream) {
-//        let mut total = None;
-//        let mut as_idents: Vec<&Ident> = self.expressions
-//            .iter()
-//            .collect();
-//        let last_ident = as_idents.pop().unwrap();
-//        as_idents.iter()
-//            .for_each(|i| {
-//                if let Some(current_total) = &total {
-//                    total = Some(quote!(compose_two(#i, #current_total)));
-//                } else {
-//                    total = Some(quote!(compose_two(#i, #last_ident)));
-//                }
-//            });
-//        total.to_tokens(tokens);
-//    }
-//}
-
-//impl ToTokens for ComposeInput {
-//    fn to_tokens(&self, tokens: &mut proc_macro2::TokenStream) {
-//        let result = self.expressions
-//            .iter()
-//            .rev()
-//            .fold(None, |acc: Option<proc_macro2::TokenStream>, expr: &Ident| {
-//                Some(match acc {
-//                    Some(prev) => quote!(compose_two(#expr, #prev)),
-//                    None => quote!(#expr)
-//                })
-//            });
-//        result.to_tokens(tokens);
-//    }
-//}
 
 impl ToTokens for ComposeInput {
     fn to_tokens(&self, tokens: &mut proc_macro2::TokenStream) {
