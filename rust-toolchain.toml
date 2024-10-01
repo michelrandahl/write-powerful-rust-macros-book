@@ -1,0 +1,7 @@
+[toolchain]
+#channel = "nightly" # or "nightly-YYYY-MM-DD" for a specific date
+channel = "1.80.0" # or "nightly-YYYY-MM-DD" for a specific date
+profile = "default"
+# NOTE: rust-src and rust-analyzer-preview or rust-analyzer-preview, is required for rust-analyzer to work
+components = [ "rust-src", "rustfmt", "rust-analyzer-preview" ]
+targets = [ ]
